@@ -1,6 +1,6 @@
 import { Stock } from '@/models/stock'
 import contentful from '@/plugins/contentful'
-import { CategoryEnum } from '@/enum/cateogory.enum'
+import { CategoryEnum } from '@/enum/category.enum'
 import { StockOrderEnum } from '@/enum/stockOrder.enum'
 
 export class StockRepository {

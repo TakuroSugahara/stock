@@ -1,6 +1,6 @@
 import { BaseEntity } from './baseEntity'
-import { CategoryEnum } from '~/enum/cateogory.enum'
-import { PlatformEnum, PlatformLogoEnum } from '~/enum/platform.enum'
+import { CategoryEnum } from '@/enum/category.enum'
+import { PlatformEnum, PlatformLogoEnum } from '@/enum/platform.enum'
 
 // - タイトル
 // - 最終的な価格
