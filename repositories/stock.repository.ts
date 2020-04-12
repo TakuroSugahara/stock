@@ -6,6 +6,7 @@ import { StockOrderEnum } from '@/enum/stockOrder.enum'
 export class StockRepository {
   items: Stock[] = []
   category: CategoryEnum = CategoryEnum.MASK
+  tags: string[] = []
   total: number = 0
   hits: number = 0
   order: StockOrderEnum = StockOrderEnum.PRICE
@@ -23,8 +24,33 @@ export class StockRepository {
     this.order = order
   }
 
+  selectTag(tag: string) {
+    if (this.containTag(tag)) {
+      this.popTag(tag)
+      return
+    }
+    this.addTag(tag)
+  }
+
+  resetTags() {
+    this.tags = []
+  }
+
+  private popTag(tag: string) {
+    const index = this.tags.findIndex((t) => t === tag)
+    this.tags.splice(index, 1)
+  }
+
+  private addTag(tag: string) {
+    this.tags.push(tag)
+  }
+
+  private containTag(tag: string): boolean {
+    return this.tags.some((t) => t === tag)
+  }
+
   private get LIMIT(): number {
-    return 2
+    return 20
   }
 
   private get skip(): number {
@@ -40,6 +66,15 @@ export class StockRepository {
       return `-fields.${this.order}`
     }
     return `fields.${this.order}`
+  }
+
+  private get tagsField(): string {
+    return this.tags.reduce((pre, cur) => {
+      if (pre) {
+        return `${pre},${cur}`
+      }
+      return cur
+    }, '')
   }
 
   private get CONTENT_TYPE(): string {
@@ -70,13 +105,17 @@ export class StockRepository {
   }
 
   private get findParams() {
-    return {
+    const params: any = {
       limit: this.LIMIT,
       skip: this.skip,
       content_type: this.CONTENT_TYPE,
       order: this.orderField,
       'fields.category': this.category
     }
+    if (this.tags.length) {
+      params['fields.tags[in]'] = this.tagsField
+    }
+    return params
   }
 
   /**
