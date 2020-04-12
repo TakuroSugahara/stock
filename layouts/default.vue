@@ -1,12 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="false"
-      :clipped="clipped"
-      app
-      right
-    >
+    <v-navigation-drawer v-model="drawer" app right>
       <v-list>
         <v-list-item
           v-for="(item, i) in items"
@@ -16,21 +10,21 @@
           @click="blankPage(item.link)"
         >
           <v-list-item-action>
-            <v-icon>{{ item.icon }}</v-icon>
+            <v-icon color="primary">{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title v-text="item.title" />
+            <v-list-item-title class="primary--text" v-text="item.title" />
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" color="white" app>
+    <v-app-bar color="white" app :absolute="false">
       <v-toolbar-title
         class="primary--text font-weight-bold mx-auto"
         v-text="title"
       />
       <v-spacer />
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-app-bar-nav-icon color="primary" @click.stop="drawer = !drawer" />
     </v-app-bar>
     <v-content class="grey lighten-3" style="padding-bottom: 80px">
       <v-container>
@@ -45,9 +39,8 @@ import { Component, Vue } from 'nuxt-property-decorator'
 
 @Component
 export default class Page extends Vue {
-  clipped: boolean = false
   drawer: boolean = false
-  title: string = '在庫Navi'
+  title: string = '在庫ナビ'
   items: { title: string; icon: string; link: string }[] = [
     {
       title: '公式Twitter',

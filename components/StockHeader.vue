@@ -44,7 +44,11 @@
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { StockRepository } from '@/repositories/stock.repository'
 import { CATEGORIES, CategoryEnum } from '@/enum/category.enum'
-import { STOCK_ORDERS, STOCK_ORDER } from '@/enum/stockOrder.enum'
+import {
+  STOCK_ORDERS,
+  STOCK_ORDER,
+  StockOrderEnum
+} from '@/enum/stockOrder.enum'
 
 @Component
 export default class StockCard extends Vue {
@@ -64,8 +68,8 @@ export default class StockCard extends Vue {
     return STOCK_ORDERS
   }
 
-  selectOrders(order: STOCK_ORDER) {
-    this.stockRepository.setOrder(order.value)
+  selectOrders(order: StockOrderEnum) {
+    this.stockRepository.setOrder(order)
     this.stockRepository.init()
   }
 }

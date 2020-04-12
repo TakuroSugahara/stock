@@ -35,15 +35,14 @@ export class StockRepository {
     return this.items.length < this.total
   }
 
-  private orderField(): string {
+  private get orderField(): string {
+    if (this.order === StockOrderEnum.AMOUNT) {
+      return `-fields.${this.order}`
+    }
     return `fields.${this.order}`
   }
 
-  private categoryField(): string {
-    return `fields.${this.category}`
-  }
-
-  private CONTENT_TYPE(): string {
+  private get CONTENT_TYPE(): string {
     return 'stock'
   }
 
@@ -60,7 +59,8 @@ export class StockRepository {
       platform: data.fields.platform,
       shopName: data.fields.shopName,
       affiliateLink: data.fields.affiliateLink,
-      category: data.fields.category
+      category: data.fields.category,
+      tags: data.fields.tags
     })
   }
 
@@ -74,8 +74,8 @@ export class StockRepository {
       limit: this.LIMIT,
       skip: this.skip,
       content_type: this.CONTENT_TYPE,
-      'fields.category,': this.categoryField,
-      order: this.orderField
+      order: this.orderField,
+      'fields.category': this.category
     }
   }
 
@@ -83,7 +83,9 @@ export class StockRepository {
    * 現在の条件でStockの一覧を返す
    */
   private async find(): Promise<Stock[]> {
+    console.log('find params', this.findParams)
     const data = await contentful.getEntries(this.findParams)
+    console.log(data)
     const stocks = data.items.map((item: any) => {
       return this.createStockInstance(item)
     })

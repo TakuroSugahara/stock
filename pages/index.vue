@@ -1,7 +1,7 @@
 <template>
   <div>
     <StockHeader :stock-repository="stockRepository" />
-    <v-row>
+    <v-row class="mt-4">
       <v-col
         v-for="(stock, i) in stockRepository.items"
         :key="i"
