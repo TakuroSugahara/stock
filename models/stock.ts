@@ -18,16 +18,19 @@ export class Stock extends BaseEntity<Stock> {
   title: string
   price: number
   amount: number
-  deliveryDate: Date
+  deliveryDate: Date | null
   image: string
   platform: PlatformEnum
   shopName: string
-  afterLink: string
+  affiliateLink: string
   category: CategoryEnum
   tags: string[]
 
   constructor(data: any) {
     super()
+    this.id = data.id
+    this.createdAt = data.createdAt
+    this.updatedAt = data.updatedAt
     this.title = data.title
     this.price = data.price
     this.amount = data.amount
@@ -35,7 +38,7 @@ export class Stock extends BaseEntity<Stock> {
     this.image = data.image
     this.platform = data.platform
     this.shopName = data.shopName
-    this.afterLink = data.afterLink
+    this.affiliateLink = data.affiliateLink
     this.category = data.category
     this.tags = data.tags || []
   }
