@@ -14,11 +14,14 @@
     </v-select>
     <v-card flat color="transparent">
       <v-card-actions class="primary--text">
-        <h1 class="title font-weight-bold">
+        <h1 class="subtitle-1 font-weight-bold">
           {{ stockRepository.category }}を探す
         </h1>
         <v-spacer></v-spacer>
-        {{ stockRepository.total }}<span>件</span>
+        <span class="title">
+          {{ stockRepository.total }}
+        </span>
+        <span style="font-size: 12px; padding-top: 6px">件</span>
         <v-select
           :items="orders"
           :value="orders[0]"
@@ -36,6 +39,19 @@
           </template>
         </v-select>
       </v-card-actions>
+      <v-card-actions class="mt-4 px-0">
+        <v-chip
+          v-for="(tag, i) in tags"
+          :key="i"
+          class="mr-2"
+          outlined
+          color="accent"
+          label
+          @click="selectTag(tag.name)"
+        >
+          # {{ tag.name }}
+        </v-chip>
+      </v-card-actions>
     </v-card>
   </div>
 </template>
@@ -43,6 +59,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { StockRepository } from '@/repositories/stock.repository'
+import { findTags, Tag } from '@/enum/tag.enum'
 import { CATEGORIES, CategoryEnum } from '@/enum/category.enum'
 import {
   STOCK_ORDERS,
@@ -55,12 +72,16 @@ export default class StockCard extends Vue {
   @Prop({ required: true })
   stockRepository!: StockRepository
 
+  tags: Tag[] = findTags(CategoryEnum.MASK)
+
   get categories(): CategoryEnum[] {
     return CATEGORIES
   }
 
   selectCategory(category: CategoryEnum) {
     this.stockRepository.setCategory(category)
+    this.stockRepository.resetTags()
+    this.tags = findTags(category)
     this.stockRepository.init()
   }
 
@@ -70,6 +91,11 @@ export default class StockCard extends Vue {
 
   selectOrders(order: StockOrderEnum) {
     this.stockRepository.setOrder(order)
+    this.stockRepository.init()
+  }
+
+  selectTag(tagName: string) {
+    this.stockRepository.selectTag(tagName)
     this.stockRepository.init()
   }
 }
