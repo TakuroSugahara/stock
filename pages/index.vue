@@ -1,25 +1,27 @@
 <template>
   <div>
+    <StockHeader :stock-repository="stockRepository" />
     <v-row>
       <v-col
-        v-for="(stock, i) in stockRopository.items"
+        v-for="(stock, i) in stockRepository.items"
         :key="i"
         cols="12"
         sm="6"
         md="4"
+        class="py-1"
       >
-        <StockCard :stock="stock" class="mb-3" />
+        <StockCard :stock="stock" />
       </v-col>
     </v-row>
     <div class="text-center">
       <v-btn
         color="accent"
-        :disabled="!stockRopository.canMore"
+        :disabled="!stockRepository.canMore"
         text
-        :loading="stockRopository.loading"
+        :loading="stockRepository.loading"
         @click="next"
       >
-        {{ stockRopository.canMore ? 'もっと見る' : '全件表示されました' }}
+        {{ stockRepository.canMore ? 'もっと見る' : '全件表示されました' }}
       </v-btn>
     </div>
   </div>
@@ -31,22 +33,24 @@ import { Stock } from '@/models/stock'
 import { StockRepository } from '@/repositories/stock.repository'
 
 import StockCard from '@/components/StockCard.vue'
+import StockHeader from '@/components/StockHeader.vue'
 
 @Component({
   components: {
-    StockCard
+    StockCard,
+    StockHeader
   }
 })
 export default class TemplatePage extends Vue {
   stocks: Stock[] = []
-  stockRopository: StockRepository = new StockRepository()
+  stockRepository: StockRepository = new StockRepository()
 
   async created() {
-    await this.stockRopository.init()
+    await this.stockRepository.init()
   }
 
   next() {
-    this.stockRopository.next()
+    this.stockRepository.next()
   }
 }
 </script>
