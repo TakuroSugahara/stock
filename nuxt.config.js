@@ -64,7 +64,7 @@ export default {
         light: {
           primary: '#0B1D43',
           scondary: '#2150B7',
-          accent: '#B53C31'
+          accent: '#009688'
         }
       }
     }
