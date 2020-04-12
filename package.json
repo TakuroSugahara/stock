@@ -15,17 +15,14 @@
     "*.{js,vue}": "npm run lint",
     "*.{css,vue}": "stylelint"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "dependencies": {
-    "nuxt": "^2.0.0",
     "@nuxt/typescript-runtime": "^0.4.0",
     "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/pwa": "^3.0.0-0",
-    "@nuxtjs/dotenv": "^1.4.0"
+    "nuxt": "^2.0.0",
+    "nuxt-property-decorator": "^2.5.1",
+    "save": "^2.4.0"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.6.0",
