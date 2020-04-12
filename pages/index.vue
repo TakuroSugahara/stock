@@ -1,18 +1,28 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex v-for="(stock, i) in stockRopository.items" :key="i" xs12 sm8 md6>
-      <StockCard :stock="stock" class="mb-3" />
-    </v-flex>
-    <v-btn
-      color="accent"
-      :disabled="!stockRopository.canMore"
-      text
-      :loading="stockRopository.loading"
-      @click="next"
-    >
-      {{ stockRopository.canMore ? 'もっと見る' : '全件表示されました' }}
-    </v-btn>
-  </v-layout>
+  <div>
+    <v-row>
+      <v-col
+        v-for="(stock, i) in stockRopository.items"
+        :key="i"
+        cols="12"
+        sm="6"
+        md="4"
+      >
+        <StockCard :stock="stock" class="mb-3" />
+      </v-col>
+    </v-row>
+    <div class="text-center">
+      <v-btn
+        color="accent"
+        :disabled="!stockRopository.canMore"
+        text
+        :loading="stockRopository.loading"
+        @click="next"
+      >
+        {{ stockRopository.canMore ? 'もっと見る' : '全件表示されました' }}
+      </v-btn>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
