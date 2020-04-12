@@ -29,7 +29,7 @@
       <v-spacer />
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
     </v-app-bar>
-    <v-content>
+    <v-content class="grey lighten-3">
       <v-container>
         <nuxt />
       </v-container>
