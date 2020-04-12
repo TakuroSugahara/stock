@@ -5,6 +5,7 @@
       :mini-variant="false"
       :clipped="clipped"
       app
+      right
     >
       <v-list>
         <v-list-item
@@ -23,10 +24,10 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" color="white" flat>
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title class="body-2 mx-auto" v-text="title" />
+    <v-app-bar :clipped-left="clipped" color="white" app>
+      <v-toolbar-title class="font-weight-bold mx-auto" v-text="title" />
       <v-spacer />
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
     </v-app-bar>
     <v-content>
       <v-container>
@@ -43,7 +44,7 @@ import { Component, Vue } from 'nuxt-property-decorator'
 export default class Page extends Vue {
   clipped: boolean = false
   drawer: boolean = false
-  title: string = '在庫速報.com'
+  title: string = '在庫Navi'
   items: { title: string; icon: string; link: string }[] = [
     {
       title: '公式Twitter',
