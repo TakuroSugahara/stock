@@ -31,7 +31,7 @@
           :href="stock.affiliateLink"
           class="font-weight-bold elevation-0 mb-2"
           color="accent"
-          tile
+          block
           >詳細を見る</v-btn
         >
         <div class="overline">
@@ -55,7 +55,6 @@ export default class StockCard extends Vue {
   @Prop({ default: false })
   stock!: Stock
 
-  // TODO: 量の単位が必要 カテゴリーから取得する
   get displayPrice(): string {
     return `${this.stock.price}円 / ${this.stock.amount}${this.stock.unit}`
   }
