@@ -1,6 +1,6 @@
 import { BaseEntity } from './baseEntity'
 import { CategoryEnum } from '~/enum/cateogory.enum'
-import { PlatformEnum } from '~/enum/platform.enum'
+import { PlatformEnum, PlatformLogoEnum } from '~/enum/platform.enum'
 
 // - タイトル
 // - 最終的な価格
@@ -44,4 +44,24 @@ export class Stock extends BaseEntity<Stock> {
   }
 
   // TODO: プラットフォームでアフィリエイトタグを変更したURLを生成
+
+  get unit(): string {
+    if (
+      this.category === CategoryEnum.ALCOHOL ||
+      this.category === CategoryEnum.ALCOHOL_GEL
+    ) {
+      return 'ml'
+    }
+    if (this.category === CategoryEnum.MASK) {
+      return '枚'
+    }
+    return '個'
+  }
+
+  get platformLogo(): string {
+    if (this.platform === PlatformEnum.RAKUTEN) {
+      return PlatformLogoEnum.RAKUTEN
+    }
+    return PlatformLogoEnum.AMAZON
+  }
 }
