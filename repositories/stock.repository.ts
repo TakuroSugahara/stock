@@ -31,7 +31,7 @@ export class StockRepository {
     return this.items.length
   }
 
-  private get canMore(): boolean {
+  get canMore(): boolean {
     return this.items.length < this.total
   }
 
