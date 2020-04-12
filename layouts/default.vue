@@ -25,11 +25,14 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="clipped" color="white" app>
-      <v-toolbar-title class="font-weight-bold mx-auto" v-text="title" />
+      <v-toolbar-title
+        class="primary--text font-weight-bold mx-auto"
+        v-text="title"
+      />
       <v-spacer />
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
     </v-app-bar>
-    <v-content class="grey lighten-3">
+    <v-content class="grey lighten-3" style="padding-bottom: 80px">
       <v-container>
         <nuxt />
       </v-container>
