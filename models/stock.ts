@@ -47,12 +47,15 @@ export class Stock extends BaseEntity<Stock> {
 
   get unit(): string {
     if (
-      this.category === CategoryEnum.ALCOHOL ||
-      this.category === CategoryEnum.ALCOHOL_GEL
+      this.category === CategoryEnum.ALCOHOL_GEL ||
+      this.category === CategoryEnum.ALCOHOL_SPRAY
     ) {
       return 'ml'
     }
-    if (this.category === CategoryEnum.MASK) {
+    if (
+      this.category === CategoryEnum.MASK ||
+      this.category === CategoryEnum.ALCOHOL_TISSUE
+    ) {
       return '枚'
     }
     return '個'

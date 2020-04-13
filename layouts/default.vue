@@ -18,7 +18,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar color="white" app :absolute="false">
+    <v-app-bar color="white" app hide-on-scroll>
       <v-toolbar-title
         class="primary--text font-weight-bold mx-auto"
         v-text="title"
@@ -50,22 +50,31 @@ export default class Page extends Vue {
     {
       title: 'お問い合わせ',
       icon: 'mdi-email-outline',
-      link: 'https://n-v-l.co/'
+      link:
+        'https://docs.google.com/forms/d/e/1FAIpQLScTthkmB5qmiqFo_3Pv2dCnkZzEvteIB-U0A5M-Bg5OtN38rA/viewform'
     },
     {
       title: '利用規約',
       icon: 'mdi-file-document-outline',
-      link: 'https://n-v-l.co/'
+      link:
+        'https://docs.google.com/document/d/1trQEpTnOSHg4JM3PQUTxq2yKjwYfjOU_-ALObInEhnY/edit?usp=sharing'
     },
     {
       title: 'プライバシーポリシー',
       icon: 'mdi-shield-key-outline',
-      link: 'https://n-v-l.co/'
+      link:
+        'https://docs.google.com/document/d/1hmpBqO_yGTFGOX73OXLH8tWEMaOnLw6VHuyzo2SiBEc/edit?usp=sharing'
     },
     {
       title: '運営会社',
       icon: 'mdi-domain',
       link: 'https://n-v-l.co/'
+    },
+    {
+      title: '改善リクエストはこちら',
+      icon: 'mdi-domain',
+      link:
+        'https://docs.google.com/forms/d/e/1FAIpQLSdl2Vn7SO45WQpngTqDMI_BStgSWrb6HfwnlujEDNsA8tt-Ow/viewform'
     }
   ]
 

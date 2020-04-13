@@ -68,14 +68,14 @@ import {
 } from '@/enum/stockOrder.enum'
 
 @Component
-export default class StockCard extends Vue {
+export default class StockHeader extends Vue {
   @Prop({ required: true })
   stockRepository!: StockRepository
 
   tags: Tag[] = findTags(CategoryEnum.MASK)
 
   get categories(): CategoryEnum[] {
-    return CATEGORIES
+    return CATEGORIES.map((c) => c.name)
   }
 
   selectCategory(category: CategoryEnum) {
@@ -83,6 +83,7 @@ export default class StockCard extends Vue {
     this.stockRepository.resetTags()
     this.tags = findTags(category)
     this.stockRepository.init()
+    this.$router.push(`/stocks?category=${category}`)
   }
 
   get orders(): STOCK_ORDER[] {

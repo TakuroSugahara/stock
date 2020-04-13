@@ -1,56 +1,52 @@
 <template>
-  <div>
-    <StockHeader :stock-repository="stockRepository" />
-    <v-row class="mt-4">
+  <div class="primary--text">
+    <h1 class="mt-5 subtitle-1 font-weight-bold">在庫ナビについて</h1>
+    <p style="font-size: 13px">
+      在庫ナビは、不足品となっているマスクやアルコール<br />
+      ジェルなどを手軽に探せるサービスです。<br />
+      価格順、量順、配送日順で並び替えることができるので、<br />
+      ベストな商品を探すことができます！
+    </p>
+    <h2 class="mt-5 subtitle-1 font-weight-bold">商品を選択する</h2>
+    <v-row class="mx-auto">
       <v-col
-        v-for="(stock, i) in stockRepository.items"
+        v-for="(category, i) in categories"
         :key="i"
-        cols="12"
+        cols="6"
         sm="6"
-        md="4"
-        class="py-1"
+        md="3"
+        class="pl-0 pr-3 pb-0"
       >
-        <StockCard :stock="stock" />
+        <v-btn
+          outlined
+          class="primary--text white body-2"
+          height="64"
+          width="170"
+          style="border-color: #009688 !important"
+          :to="`/stocks?category=${category.name}`"
+        >
+          <img :src="category.icon" :alt="category.name" width="28" />
+          <div v-if="category.name === 'アルコールティッシュ'">
+            アルコール<br />
+            ティッシュ
+          </div>
+          <div v-else>
+            {{ category.name }}
+          </div>
+        </v-btn>
       </v-col>
     </v-row>
-    <div class="text-center">
-      <v-btn
-        color="accent"
-        :disabled="!stockRepository.canMore"
-        text
-        :loading="stockRepository.loading"
-        @click="next"
-      >
-        {{ stockRepository.canMore ? 'もっと見る' : '全件表示されました' }}
-      </v-btn>
-    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Stock } from '@/models/stock'
-import { StockRepository } from '@/repositories/stock.repository'
+import { CATEGORIES } from '@/enum/category.enum'
 
-import StockCard from '@/components/StockCard.vue'
-import StockHeader from '@/components/StockHeader.vue'
-
-@Component({
-  components: {
-    StockCard,
-    StockHeader
-  }
-})
+@Component
 export default class TemplatePage extends Vue {
-  stocks: Stock[] = []
-  stockRepository: StockRepository = new StockRepository()
-
-  async created() {
-    await this.stockRepository.init()
-  }
-
-  next() {
-    this.stockRepository.next()
+  get categories() {
+    return CATEGORIES
   }
 }
 </script>
