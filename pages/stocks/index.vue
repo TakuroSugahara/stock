@@ -51,3 +51,9 @@ export default class StockPage extends Vue {
   }
 }
 </script>
+
+<style>
+#stocks {
+  touch-action: manipulation;
+}
+</style>
