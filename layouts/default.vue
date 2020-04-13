@@ -45,7 +45,7 @@ export default class Page extends Vue {
     {
       title: '公式Twitter',
       icon: 'mdi-twitter',
-      link: 'https://n-v-l.co/'
+      link: 'https://twitter.com/zaiko_navi'
     },
     {
       title: 'お問い合わせ',
