@@ -2,7 +2,7 @@
   <div>
     <v-select
       :items="categories"
-      class="mt-3 caption"
+      class="mt-3"
       solo
       dense
       flat
@@ -27,7 +27,7 @@
           :value="orders[0]"
           label="並び替え"
           solo
-          class="ml-2 caption"
+          class="ml-2"
           dense
           hide-details
           flat
