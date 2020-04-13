@@ -45,7 +45,7 @@ export class StockRepository {
     this.tags.push(tag)
   }
 
-  private containTag(tag: string): boolean {
+  containTag(tag: string): boolean {
     return this.tags.some((t) => t === tag)
   }
 
