@@ -18,7 +18,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar color="white" app :absolute="false">
+    <v-app-bar color="white" app hide-on-scroll>
       <v-toolbar-title
         class="primary--text font-weight-bold mx-auto"
         v-text="title"
