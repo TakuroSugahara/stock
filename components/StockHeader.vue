@@ -83,6 +83,7 @@ export default class StockHeader extends Vue {
     this.stockRepository.resetTags()
     this.tags = findTags(category)
     this.stockRepository.init()
+    this.$router.push(`/stocks?category=${category}`)
   }
 
   get orders(): STOCK_ORDER[] {
