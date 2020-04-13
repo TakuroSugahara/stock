@@ -68,14 +68,14 @@ import {
 } from '@/enum/stockOrder.enum'
 
 @Component
-export default class StockCard extends Vue {
+export default class StockHeader extends Vue {
   @Prop({ required: true })
   stockRepository!: StockRepository
 
   tags: Tag[] = findTags(CategoryEnum.MASK)
 
   get categories(): CategoryEnum[] {
-    return CATEGORIES
+    return CATEGORIES.map((c) => c.name)
   }
 
   selectCategory(category: CategoryEnum) {
