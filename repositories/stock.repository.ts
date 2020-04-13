@@ -122,14 +122,11 @@ export class StockRepository {
    * 現在の条件でStockの一覧を返す
    */
   private async find(): Promise<Stock[]> {
-    console.log('find params', this.findParams)
     const data = await contentful.getEntries(this.findParams)
-    console.log(data)
     const stocks = data.items.map((item: any) => {
       return this.createStockInstance(item)
     })
     this.setPaginationInfo({ items: stocks, total: data.total })
-    console.log(this)
     return stocks
   }
 

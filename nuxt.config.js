@@ -1,24 +1,41 @@
 require('dotenv').config()
 
+const SITE_NAME = '在庫ナビ'
+
 export default {
   mode: 'spa',
   /*
    ** Headers of the page
    */
   head: {
-    titleTemplate: '在庫ナビ',
-    title: '在庫ナビ',
+    titleTemplate: SITE_NAME,
+    title: SITE_NAME,
     meta: [
       { charset: 'utf-8' },
       {
         name: 'viewport',
-        content: 'width=device-width, initial-scale=1, minimum-scale=1.0'
+        content:
+          'width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0'
       },
       {
         hid: 'description',
         name: 'description',
         content:
           'マスク・アルコール消毒液などの在庫情報を収集しています。価格や配送日など気になる情報ですぐに見つけ出すことができます。'
+      },
+      { hid: 'og:image', property: 'og:image', content: '/ogp.jpeg' },
+      { name: 'twitter:card', content: 'summary' },
+      { name: 'twitter:site', content: '@Twitter' },
+      { name: 'twitter:title', content: SITE_NAME },
+      { name: 'twitter:url', content: 'https://zaiko-navi.info' },
+      {
+        name: 'twitter:description',
+        content:
+          'マスク・アルコール消毒液などの在庫情報を収集しています。価格や配送日など気になる情報ですぐに見つけ出すことができます。'
+      },
+      {
+        name: 'twitter:image',
+        content: '/ogp.jpeg'
       }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]

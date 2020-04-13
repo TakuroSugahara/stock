@@ -9,20 +9,20 @@
           exact
           @click="blankPage(item.link)"
         >
-          <v-list-item-action>
+          <v-list-item-action class="mr-3">
             <v-icon color="primary">{{ item.icon }}</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title class="primary--text" v-text="item.title" />
+            <v-list-item-title
+              class="primary--text body-2"
+              v-text="item.title"
+            />
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar color="white" app hide-on-scroll>
-      <v-toolbar-title
-        class="primary--text font-weight-bold mx-auto"
-        v-text="title"
-      />
+      <v-toolbar-title class="primary--text font-weight-bold" v-text="title" />
       <v-spacer />
       <v-app-bar-nav-icon color="primary" @click.stop="drawer = !drawer" />
     </v-app-bar>
@@ -45,7 +45,7 @@ export default class Page extends Vue {
     {
       title: '公式Twitter',
       icon: 'mdi-twitter',
-      link: 'https://n-v-l.co/'
+      link: 'https://twitter.com/zaiko_navi'
     },
     {
       title: 'お問い合わせ',
@@ -72,7 +72,7 @@ export default class Page extends Vue {
     },
     {
       title: '改善リクエストはこちら',
-      icon: 'mdi-domain',
+      icon: 'mdi-lightbulb-on-outline',
       link:
         'https://docs.google.com/forms/d/e/1FAIpQLSdl2Vn7SO45WQpngTqDMI_BStgSWrb6HfwnlujEDNsA8tt-Ow/viewform'
     }
