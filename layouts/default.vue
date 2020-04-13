@@ -50,7 +50,8 @@ export default class Page extends Vue {
     {
       title: 'お問い合わせ',
       icon: 'mdi-email-outline',
-      link: 'https://n-v-l.co/'
+      link:
+        'https://docs.google.com/forms/d/e/1FAIpQLScTthkmB5qmiqFo_3Pv2dCnkZzEvteIB-U0A5M-Bg5OtN38rA/viewform'
     },
     {
       title: '利用規約',
@@ -68,6 +69,12 @@ export default class Page extends Vue {
       title: '運営会社',
       icon: 'mdi-domain',
       link: 'https://n-v-l.co/'
+    },
+    {
+      title: '改善リクエストはこちら',
+      icon: 'mdi-domain',
+      link:
+        'https://docs.google.com/forms/d/e/1FAIpQLSdl2Vn7SO45WQpngTqDMI_BStgSWrb6HfwnlujEDNsA8tt-Ow/viewform'
     }
   ]
 
