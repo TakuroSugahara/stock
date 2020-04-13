@@ -55,12 +55,14 @@ export default class Page extends Vue {
     {
       title: '利用規約',
       icon: 'mdi-file-document-outline',
-      link: 'https://n-v-l.co/'
+      link:
+        'https://docs.google.com/document/d/1trQEpTnOSHg4JM3PQUTxq2yKjwYfjOU_-ALObInEhnY/edit?usp=sharing'
     },
     {
       title: 'プライバシーポリシー',
       icon: 'mdi-shield-key-outline',
-      link: 'https://n-v-l.co/'
+      link:
+        'https://docs.google.com/document/d/1hmpBqO_yGTFGOX73OXLH8tWEMaOnLw6VHuyzo2SiBEc/edit?usp=sharing'
     },
     {
       title: '運営会社',
