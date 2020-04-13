@@ -26,7 +26,7 @@
           :to="`/stocks?category=${category.name}`"
         >
           <img :src="category.icon" :alt="category.name" width="28" />
-          <div v-if="category.name === 'アルコールティッシュ'">
+          <div v-if="category.name === 'アルコールティッシュ'" class="ml-2">
             アルコール<br />
             ティッシュ
           </div>

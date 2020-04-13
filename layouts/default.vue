@@ -22,7 +22,11 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar color="white" app hide-on-scroll>
-      <v-toolbar-title class="primary--text font-weight-bold" v-text="title" />
+      <v-toolbar-title
+        class="primary--text font-weight-bold"
+        @click="home"
+        v-text="title"
+      />
       <v-spacer />
       <v-app-bar-nav-icon color="primary" @click.stop="drawer = !drawer" />
     </v-app-bar>
@@ -80,6 +84,10 @@ export default class Page extends Vue {
 
   blankPage(link: string) {
     window.open(link, '_blank')
+  }
+
+  home() {
+    this.$router.push('/')
   }
 }
 </script>

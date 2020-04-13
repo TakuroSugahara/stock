@@ -2,7 +2,7 @@
   <div>
     <v-select
       :items="categories"
-      class="mt-3 caption"
+      class="mt-3"
       solo
       dense
       flat
@@ -27,7 +27,7 @@
           :value="orders[0]"
           label="並び替え"
           solo
-          class="ml-2 caption"
+          class="ml-2"
           dense
           hide-details
           flat
@@ -41,12 +41,12 @@
       </v-card-actions>
       <v-card-actions class="mt-4 px-0">
         <v-chip
-          v-for="(tag, i) in tags"
+          v-for="(tag, i) in displayTags"
           :key="i"
           class="mr-2"
-          outlined
-          color="accent"
+          :outlined="!tag.selected"
           label
+          color="accent"
           @click="selectTag(tag.name)"
         >
           # {{ tag.name }}
@@ -73,6 +73,13 @@ export default class StockHeader extends Vue {
   stockRepository!: StockRepository
 
   tags: Tag[] = findTags(CategoryEnum.MASK)
+
+  get displayTags() {
+    return this.tags.map((t) => {
+      const selected = this.stockRepository.containTag(t.name)
+      return Object.assign(t, { selected })
+    })
+  }
 
   get categories(): CategoryEnum[] {
     return CATEGORIES.map((c) => c.name)
