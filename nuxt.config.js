@@ -59,7 +59,8 @@ export default {
     '@nuxt/typescript-build',
     // Doc: https://github.com/nuxt-community/stylelint-module
     '@nuxtjs/stylelint-module',
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    '@nuxtjs/gtm'
   ],
   /*
    ** Nuxt.js modules
@@ -68,7 +69,6 @@ export default {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     '@nuxtjs/pwa'
-    // Doc: https://github.com/nuxt-community/dotenv-module
   ],
 
   env: {
@@ -81,6 +81,15 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
+
+  /*
+   ** gtm-module
+   ** See https://github.com/nuxt-community/gtm-module
+   */
+  gtm: {
+    dev: false,
+    id: 'GTM-KXH58KM'
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
