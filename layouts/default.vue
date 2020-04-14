@@ -24,6 +24,7 @@
     <v-app-bar color="white" app hide-on-scroll>
       <v-toolbar-title
         class="primary--text font-weight-bold"
+        style="cursor: pointer"
         @click="home"
         v-text="title"
       />
