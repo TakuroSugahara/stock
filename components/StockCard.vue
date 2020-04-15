@@ -24,7 +24,7 @@
           {{ displayPrice }}
         </div>
         <div class="red--text mb-2" style="font-size: 12px;">
-          発送日 : {{ displayDeliveryDate }}
+          発送予定日 : {{ displayDeliveryDate }}
         </div>
         <v-btn
           target="_blank"
