@@ -36,17 +36,51 @@
         </v-btn>
       </v-col>
     </v-row>
+    <v-row v-if="!stockRepository.loading" class="mt-4">
+      <v-col
+        v-for="(stock, i) in stockRepository.items"
+        :key="i"
+        cols="12"
+        sm="6"
+        md="4"
+        class="py-1"
+      >
+        <StockCard :stock="stock" />
+      </v-col>
+    </v-row>
+    <div class="mt-3 text-center">
+      <v-btn
+        outlined
+        color="accent"
+        :loading="stockRepository.loading"
+        to="/stocks?category=マスク"
+      >
+        続きを見る
+      </v-btn>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
 import { CATEGORIES } from '@/enum/category.enum'
+import { StockRepository } from '@/repositories/stock.repository'
+import StockCard from '@/components/StockCard.vue'
 
-@Component
+@Component({
+  components: {
+    StockCard
+  }
+})
 export default class TemplatePage extends Vue {
+  stockRepository: StockRepository = new StockRepository()
+
   get categories() {
     return CATEGORIES
+  }
+
+  created() {
+    this.stockRepository.list()
   }
 }
 </script>
