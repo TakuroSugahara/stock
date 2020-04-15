@@ -131,6 +131,26 @@ export class StockRepository {
   }
 
   /**
+   * 更新日の降順で表示
+   */
+  async list(): Promise<Stock[]> {
+    this.loading = true
+    this.items = []
+    const data = await contentful.getEntries({
+      limit: 10,
+      content_type: this.CONTENT_TYPE,
+      order: '-sys.updatedAt'
+    })
+    const stocks = data.items.map((item: any) => {
+      return this.createStockInstance(item)
+    })
+    this.setPaginationInfo({ items: stocks, total: data.total })
+    this.items = this.items.concat(stocks)
+    this.loading = false
+    return this.items
+  }
+
+  /**
    * 最初の一覧
    */
   async init(): Promise<Stock[]> {
