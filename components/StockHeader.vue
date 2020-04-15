@@ -11,6 +11,9 @@
       <template v-slot:label>
         <span class="caption primary--text">他の商品を探す</span>
       </template>
+      <template v-slot:item="{ item }">
+        <span class="list_categopry primary--text">{{ item }}</span>
+      </template>
     </v-select>
     <v-card flat color="transparent">
       <v-card-actions class="primary--text">
@@ -37,13 +40,16 @@
           <template v-slot:label>
             <span class="primary--text caption">並び替え</span>
           </template>
+          <template v-slot:item="{ item }">
+            <span class="caption sort">{{ item.text }}</span>
+          </template>
         </v-select>
       </v-card-actions>
       <v-card-actions class="mt-4 px-0">
         <v-chip
           v-for="(tag, i) in displayTags"
           :key="i"
-          class="mr-2"
+          class="mr-2 tag_type"
           :outlined="!tag.selected"
           label
           color="accent"

@@ -43,8 +43,6 @@ export class Stock extends BaseEntity<Stock> {
     this.tags = data.tags || []
   }
 
-  // TODO: プラットフォームでアフィリエイトタグを変更したURLを生成
-
   get unit(): string {
     if (
       this.category === CategoryEnum.ALCOHOL_GEL ||

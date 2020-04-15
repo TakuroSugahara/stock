@@ -19,7 +19,7 @@
       >
         <v-btn
           outlined
-          class="primary--text white body-2"
+          class="primary--text white body-2 top_category"
           height="64"
           width="170"
           style="border-color: #009688 !important"
