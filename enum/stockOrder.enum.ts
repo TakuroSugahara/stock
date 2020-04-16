@@ -6,7 +6,7 @@ export enum StockOrderEnum {
 
 export enum StockStringOrderEnum {
   PRICE = '価格順',
-  AMOUNT = '量順',
+  AMOUNT = '数量順',
   DELIVERY_DATE = '配送日順'
 }
 
