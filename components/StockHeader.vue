@@ -80,6 +80,11 @@ export default class StockHeader extends Vue {
 
   tags: Tag[] = findTags(CategoryEnum.MASK)
 
+  created() {
+    const category: any = this.$route.query.category || CategoryEnum.MASK
+    this.tags = findTags(category)
+  }
+
   get displayTags() {
     return this.tags.map((t) => {
       const selected = this.stockRepository.containTag(t.name)
