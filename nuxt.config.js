@@ -1,6 +1,11 @@
 require('dotenv').config()
 
 const SITE_NAME = '在庫ナビ'
+const OGP_IMAGE = 'https://zaiko-navi.info/ogp.jpeg'
+const OGP_DESC =
+  'マスク・アルコール消毒液などの在庫情報を収集しています。価格や配送日など気になる情報ですぐに見つけ出すことができます。'
+const FAVI = 'https://zaiko-navi.info/favicon.ico'
+const DOMAIN = 'https://zaiko-navi.info'
 
 export default {
   mode: 'spa',
@@ -20,25 +25,28 @@ export default {
       {
         hid: 'description',
         name: 'description',
-        content:
-          'マスク・アルコール消毒液などの在庫情報を収集しています。価格や配送日など気になる情報ですぐに見つけ出すことができます。'
+        content: OGP_DESC
       },
-      { hid: 'og:image', property: 'og:image', content: '/ogp.jpeg' },
+      { hid: 'og:title', property: 'og:title', content: SITE_NAME },
+      { hid: 'og:site_name', property: 'og:site_name', content: SITE_NAME },
+      { hid: 'og:type', property: 'og:type', content: 'website' },
+      { hid: 'og:url', property: 'og:url', content: DOMAIN },
+      { name: 'og:description', content: OGP_DESC },
+      { hid: 'og:image', property: 'og:image', content: OGP_IMAGE },
       { name: 'twitter:card', content: 'summary' },
       { name: 'twitter:site', content: '@Twitter' },
       { name: 'twitter:title', content: SITE_NAME },
-      { name: 'twitter:url', content: 'https://zaiko-navi.info' },
+      { name: 'twitter:url', content: DOMAIN },
       {
         name: 'twitter:description',
-        content:
-          'マスク・アルコール消毒液などの在庫情報を収集しています。価格や配送日など気になる情報ですぐに見つけ出すことができます。'
+        content: OGP_DESC
       },
       {
         name: 'twitter:image',
-        content: '/ogp.jpeg'
+        content: OGP_IMAGE
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: FAVI }]
   },
   /*
    ** Customize the progress-bar color
