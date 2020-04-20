@@ -22,14 +22,20 @@
       </v-list>
     </v-navigation-drawer>
     <v-app-bar color="white" app>
-      <v-toolbar-title
-        class="primary--text font-weight-bold"
-        style="cursor: pointer"
-        @click="home"
-        v-text="title"
-      />
-      <v-spacer />
-      <v-app-bar-nav-icon color="primary" @click.stop="drawer = !drawer" />
+      <v-row>
+        <v-col cols="2"> </v-col>
+        <v-col class="d-flex justify-space-around">
+          <v-toolbar-title
+            class="font-weight-bold"
+            style="cursor: pointer; color: #00BFFF"
+            @click="home"
+            v-text="title"
+          />
+        </v-col>
+        <v-col cols="2" class="d-flex justify-end pa-0">
+          <v-app-bar-nav-icon color="primary" @click.stop="drawer = !drawer" />
+        </v-col>
+      </v-row>
     </v-app-bar>
     <v-content class="grey lighten-3" style="padding-bottom: 80px">
       <v-container>

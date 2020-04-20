@@ -22,7 +22,7 @@
           class="primary--text white body-2 top_category"
           height="64"
           width="170"
-          style="border-color: #009688 !important"
+          style="border-color: #00BFFF !important"
           :to="`/stocks?category=${category.name}`"
         >
           <img :src="category.icon" :alt="category.name" width="28" />
