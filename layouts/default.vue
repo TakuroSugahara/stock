@@ -66,7 +66,7 @@ export default class Page extends Vue {
   title: string = '在庫ナビ'
   items: { title: string; type: string; icon: string; link: string }[] = [
     {
-      title: '公式Twitter',
+      title: '公式nwitter',
       type: 'link',
       icon: 'mdi-twitter',
       link: 'https://twitter.com/zaiko_navi'
@@ -134,7 +134,7 @@ export default class Page extends Vue {
   }
 
   get shareTwitter() {
-    const baseUrl = 'https://twitter.com/intent/tweet?'
+    const baseUrl = 'https://mobile.twitter.com/intent/tweet?'
     const text = [
       'text',
       '配送日順での並び替えも可能！\nマスクなどの不足している商品を探せる「在庫ナビ」はこちら\n'
@@ -154,7 +154,7 @@ export default class Page extends Vue {
   }
 
   get shareLine() {
-    return `https://social-plugins.line.me/lineit/share?url={$location.href}`
+    return `https://social-plugins.line.me/lineit/share?url=${location.href}`
   }
 }
 </script>
