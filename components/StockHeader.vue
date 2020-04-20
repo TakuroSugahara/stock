@@ -52,7 +52,7 @@
           class="mr-2 tag_type"
           :outlined="!tag.selected"
           label
-          color="accent"
+          :color="tag.selected ? 'grey lighten-2' : 'grey darken-1'"
           @click="selectTag(tag.name)"
         >
           # {{ tag.name }}

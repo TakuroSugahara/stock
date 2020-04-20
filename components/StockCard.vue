@@ -23,13 +23,13 @@
         <div class="red--text subtitle-2 font-weight-bold mb-1">
           {{ displayPrice }}
         </div>
-        <div class="red--text mb-2" style="font-size: 12px;">
+        <div class="grey--text text--darken-2 mb-2" style="font-size: 12px;">
           発送予定日 : {{ displayDeliveryDate }}
         </div>
         <v-btn
           target="_blank"
           :href="stock.affiliateLink"
-          class="font-weight-bold elevation-0 mb-2 detail"
+          class="font-weight-bold elevation-0 mb-2 detail black--text"
           color="accent"
           block
           >詳細を見る</v-btn
