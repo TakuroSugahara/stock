@@ -7,7 +7,6 @@
         :key="i"
         cols="12"
         sm="6"
-        md="4"
         class="py-1"
       >
         <StockCard :stock="stock" />

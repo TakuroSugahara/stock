@@ -10,7 +10,10 @@
           @click="blankPage(item.link)"
         >
           <v-list-item-action class="mr-3">
-            <v-icon color="primary">{{ item.icon }}</v-icon>
+            <v-icon v-if="item.type === 'link'" color="primary">{{
+              item.icon
+            }}</v-icon>
+            <v-img v-if="item.type === 'share'" :src="item.icon" width="16" />
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title
@@ -43,7 +46,10 @@
         </v-col>
       </v-row>
     </v-app-bar>
-    <v-content class="white" style="padding-bottom: 80px">
+    <v-content
+      class="mx-auto white"
+      style="padding-bottom: 80px; max-width: 800px; width: 100%;"
+    >
       <v-container>
         <nuxt />
       </v-container>
@@ -58,40 +64,64 @@ import { Component, Vue } from 'nuxt-property-decorator'
 export default class Page extends Vue {
   drawer: boolean = false
   title: string = '在庫ナビ'
-  items: { title: string; icon: string; link: string }[] = [
+  items: { title: string; type: string; icon: string; link: string }[] = [
     {
-      title: '公式Twitter',
+      title: '公式nwitter',
+      type: 'link',
       icon: 'mdi-twitter',
       link: 'https://twitter.com/zaiko_navi'
     },
     {
       title: 'お問い合わせ',
+      type: 'link',
       icon: 'mdi-email-outline',
       link:
         'https://docs.google.com/forms/d/e/1FAIpQLScTthkmB5qmiqFo_3Pv2dCnkZzEvteIB-U0A5M-Bg5OtN38rA/viewform'
     },
     {
       title: '利用規約',
+      type: 'link',
       icon: 'mdi-file-document-outline',
       link:
         'https://docs.google.com/document/d/1trQEpTnOSHg4JM3PQUTxq2yKjwYfjOU_-ALObInEhnY/edit?usp=sharing'
     },
     {
       title: 'プライバシーポリシー',
+      type: 'link',
       icon: 'mdi-shield-key-outline',
       link:
         'https://docs.google.com/document/d/1hmpBqO_yGTFGOX73OXLH8tWEMaOnLw6VHuyzo2SiBEc/edit?usp=sharing'
     },
     {
       title: '運営会社',
+      type: 'link',
       icon: 'mdi-domain',
       link: 'https://n-v-l.co/'
     },
     {
       title: '改善リクエストはこちら',
+      type: 'link',
       icon: 'mdi-lightbulb-on-outline',
       link:
         'https://docs.google.com/forms/d/e/1FAIpQLSdl2Vn7SO45WQpngTqDMI_BStgSWrb6HfwnlujEDNsA8tt-Ow/viewform'
+    },
+    {
+      title: 'Facebookにシェア',
+      type: 'share',
+      icon: '/icon/facebook.png',
+      link: this.shareFacebook
+    },
+    {
+      title: 'Twitterにシェア',
+      type: 'share',
+      icon: '/icon/twitter.png',
+      link: this.shareTwitter
+    },
+    {
+      title: 'LINEにシェア',
+      type: 'share',
+      icon: '/icon/line.png',
+      link: this.shareLine
     }
   ]
 
@@ -101,6 +131,30 @@ export default class Page extends Vue {
 
   home() {
     this.$router.push('/')
+  }
+
+  get shareTwitter() {
+    const baseUrl = 'https://mobile.twitter.com/intent/tweet?'
+    const text = [
+      'text',
+      '配送日順での並び替えも可能！\nマスクなどの不足している商品を探せる「在庫ナビ」はこちら\n'
+    ]
+    const hashtags = ['hashtags', ['在庫ナビ ', 'マスク在庫'].join(',')]
+    const url = ['url', location.href]
+    const query = new URLSearchParams([text, url, hashtags]).toString()
+    return `${baseUrl}${query}`
+  }
+
+  get shareFacebook() {
+    const baseUrl = 'https://www.facebook.com/sharer/sharer.php?'
+    const url = ['u', location.href]
+    const query = new URLSearchParams([url]).toString()
+    console.log(query)
+    return `${baseUrl}${query}`
+  }
+
+  get shareLine() {
+    return `https://social-plugins.line.me/lineit/share?url=${location.href}`
   }
 }
 </script>

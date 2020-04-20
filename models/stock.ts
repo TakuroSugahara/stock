@@ -65,4 +65,16 @@ export class Stock extends BaseEntity<Stock> {
     }
     return PlatformLogoEnum.AMAZON
   }
+
+  get displayPrice(): string {
+    return Number(this.price).toLocaleString()
+  }
+
+  get unitPrice(): string {
+    if (this.category === CategoryEnum.MASK) {
+      return Math.floor(this.price / this.amount).toLocaleString()
+    }
+
+    return Math.floor(this.price / (this.amount / 100)).toLocaleString()
+  }
 }
