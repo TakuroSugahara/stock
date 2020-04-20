@@ -22,6 +22,11 @@
         }}</v-list-item-subtitle>
         <div class="red--text subtitle-2 font-weight-bold mb-1">
           {{ displayPrice }}
+          <span class="ml-4 caption grey--text text--darken-2">
+            {{ stock.unitPrice }}円/{{
+              stock.unit === 'ml' ? `100${stock.unit}` : stock.unit
+            }}
+          </span>
         </div>
         <div class="grey--text text--darken-2 mb-2" style="font-size: 12px;">
           発送予定日 : {{ displayDeliveryDate }}
@@ -56,7 +61,7 @@ export default class StockCard extends Vue {
   stock!: Stock
 
   get displayPrice(): string {
-    return `${this.stock.price}円 / ${this.stock.amount}${this.stock.unit}`
+    return `${this.stock.displayPrice}円 / ${this.stock.amount}${this.stock.unit}`
   }
 
   get displayDeliveryDate(): string {
