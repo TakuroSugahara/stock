@@ -43,7 +43,10 @@
         </v-col>
       </v-row>
     </v-app-bar>
-    <v-content class="white" style="padding-bottom: 80px">
+    <v-content
+      class="mx-auto white"
+      style="padding-bottom: 80px; max-width: 800px;"
+    >
       <v-container>
         <nuxt />
       </v-container>
