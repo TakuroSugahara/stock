@@ -21,7 +21,13 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar color="white" app>
+    <v-app-bar
+      color="white"
+      app
+      class="elevation-0"
+      dense
+      style="border-bottom: 1px solid rgba(0, 0, 0, 0.1) !important"
+    >
       <v-row>
         <v-col cols="2"> </v-col>
         <v-col class="d-flex justify-space-around">
@@ -37,7 +43,7 @@
         </v-col>
       </v-row>
     </v-app-bar>
-    <v-content class="grey lighten-3" style="padding-bottom: 80px">
+    <v-content class="white" style="padding-bottom: 80px">
       <v-container>
         <nuxt />
       </v-container>
