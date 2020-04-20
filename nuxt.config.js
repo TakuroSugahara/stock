@@ -108,7 +108,7 @@ export default {
       themes: {
         light: {
           primary: '#0B1D43',
-          scondary: '#2150B7',
+          scondary: '#00BFFF',
           accent: '#E3F8FF'
         }
       }

@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div id="stock_list">
     <v-select
       :items="categories"
-      class="mt-3"
+      class="mt-3 filter_button"
       solo
       dense
       flat
@@ -16,7 +16,7 @@
       </template>
     </v-select>
     <v-card flat color="transparent">
-      <v-card-actions class="primary--text">
+      <v-card-actions class="primary--text px-0">
         <h1 class="subtitle-1 font-weight-bold">
           {{ stockRepository.category }}を探す
         </h1>
@@ -119,3 +119,11 @@ export default class StockHeader extends Vue {
   }
 }
 </script>
+
+<style lang="scss">
+#stock_list {
+  .theme--light.v-text-field--solo > .v-input__control > .v-input__slot {
+    border: 1px solid rgba(0, 0, 0, 0.54) !important;
+  }
+}
+</style>

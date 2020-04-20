@@ -51,7 +51,7 @@
     <div class="mt-3 text-center">
       <v-btn
         outlined
-        color="accent"
+        color="scondary"
         :loading="stockRepository.loading"
         to="/stocks?category=マスク"
       >
