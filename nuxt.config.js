@@ -1,9 +1,9 @@
 require('dotenv').config()
 
-const SITE_NAME = '在庫ナビ'
+const SITE_NAME = '在庫ナビ | マスク最新入荷情報'
 const OGP_IMAGE = 'https://zaiko-navi.info/ogp.jpeg'
 const OGP_DESC =
-  'マスク・アルコール消毒液などの在庫情報を収集しています。価格や配送日など気になる情報ですぐに見つけ出すことができます。'
+  '在庫ナビはマスク・アルコール関連商品などの在庫情報がわかるサイトです。価格が安い順や配送日順で並び替えて比較できるため、あなたにぴったりの商品を探すことができます。入荷情報毎日更新中。'
 const FAVI = 'https://zaiko-navi.info/favicon.ico'
 const DOMAIN = 'https://zaiko-navi.info'
 
