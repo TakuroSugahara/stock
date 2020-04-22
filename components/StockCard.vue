@@ -22,7 +22,10 @@
         }}</v-list-item-subtitle>
         <div class="red--text subtitle-2 font-weight-bold mb-1">
           {{ displayPrice }}
-          <span class="ml-4 caption grey--text text--darken-2">
+          <span
+            v-if="stock.canDisplayUnit"
+            class="ml-4 caption grey--text text--darken-2"
+          >
             {{ stock.unitPrice }}円/{{
               stock.unit === 'ml' ? `100${stock.unit}` : stock.unit
             }}
