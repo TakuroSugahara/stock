@@ -2,14 +2,16 @@ export enum CategoryEnum {
   MASK = 'マスク',
   ALCOHOL_GEL = 'アルコールジェル',
   ALCOHOL_SPRAY = 'アルコールスプレー',
-  ALCOHOL_TISSUE = 'アルコールティッシュ'
+  ALCOHOL_TISSUE = 'アルコールティッシュ',
+  THERMOMETER = '体温計'
 }
 
 enum CategoryIconEnum {
   MASK = '/icon/covid.png',
   ALCOHOL_GEL = '/icon/shampoo.png',
   ALCOHOL_SPRAY = '/icon/clean.png',
-  ALCOHOL_TISSUE = '/icon/healthcare-and-medical.png'
+  ALCOHOL_TISSUE = '/icon/healthcare-and-medical.png',
+  THERMOMETER = '/icon/thermometer.png'
 }
 
 export const CATEGORIES = [
@@ -28,5 +30,9 @@ export const CATEGORIES = [
   {
     name: CategoryEnum.ALCOHOL_TISSUE,
     icon: CategoryIconEnum.ALCOHOL_TISSUE
+  },
+  {
+    name: CategoryEnum.THERMOMETER,
+    icon: CategoryIconEnum.THERMOMETER
   }
 ]

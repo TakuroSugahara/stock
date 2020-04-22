@@ -59,6 +59,10 @@ export class Stock extends BaseEntity<Stock> {
     return '個'
   }
 
+  get canDisplayUnit(): boolean {
+    return this.category !== CategoryEnum.THERMOMETER
+  }
+
   get platformLogo(): string {
     if (this.platform === PlatformEnum.RAKUTEN) {
       return PlatformLogoEnum.RAKUTEN
@@ -71,6 +75,10 @@ export class Stock extends BaseEntity<Stock> {
   }
 
   get unitPrice(): string {
+    if (this.category === CategoryEnum.THERMOMETER) {
+      return ''
+    }
+
     if (this.category === CategoryEnum.MASK) {
       return Math.floor(this.price / this.amount).toLocaleString()
     }
