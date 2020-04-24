@@ -2,7 +2,7 @@
   <v-card flat color="white">
     <v-list-item two-line>
       <v-list-item-avatar tile size="80" color="grey lighten-2">
-        <v-img :src="stock.image" :alt="stock.image">
+        <v-img :src="stock.image" :alt="stock.title">
           <template v-slot:placeholder>
             <v-row class="fill-height ma-0" align="center" justify="center">
               <v-progress-circular
