@@ -34,12 +34,11 @@
       <v-row>
         <v-col cols="2"> </v-col>
         <v-col class="d-flex justify-space-around">
-          <v-toolbar-title
-            class="font-weight-bold"
-            style="cursor: pointer; color: #00BFFF"
-            @click="home"
-            v-text="title"
-          />
+          <v-toolbar-title class="" style="cursor: pointer; " @click="home">
+            <h1 class="title font-weight-bold" style="color: #00BFFF">
+              {{ title }}
+            </h1>
+          </v-toolbar-title>
         </v-col>
         <v-col cols="2" class="d-flex justify-end pa-0">
           <v-app-bar-nav-icon color="primary" @click.stop="drawer = !drawer" />
