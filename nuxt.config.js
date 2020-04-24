@@ -27,6 +27,11 @@ export default {
         name: 'description',
         content: OGP_DESC
       },
+      {
+        name: 'keywords',
+        content:
+          'マスク,通販,在庫,販売,新着,比較,アルコール,消毒,ジェル,スプレー'
+      },
       { hid: 'og:title', property: 'og:title', content: SITE_NAME },
       { hid: 'og:site_name', property: 'og:site_name', content: SITE_NAME },
       { hid: 'og:type', property: 'og:type', content: 'website' },
