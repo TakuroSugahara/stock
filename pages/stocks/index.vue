@@ -1,6 +1,9 @@
 <template>
   <div>
-    <StockHeader :stock-repository="stockRepository" />
+    <StockHeader
+      :stock-repository="stockRepository"
+      :category-repository="categoryRepository"
+    />
     <v-row class="mt-4">
       <v-col
         v-for="(stock, i) in stockRepository.items"
@@ -24,6 +27,7 @@
 import { Component, Vue } from 'nuxt-property-decorator'
 import { Stock } from '@/models/stock'
 import { StockRepository } from '@/repositories/stock.repository'
+import { CategoryRepository } from '@/repositories/category.repository'
 
 import StockCard from '@/components/StockCard.vue'
 import StockHeader from '@/components/StockHeader.vue'
@@ -38,11 +42,16 @@ import { CategoryEnum } from '@/enum/category.enum'
 export default class StockPage extends Vue {
   stocks: Stock[] = []
   stockRepository: StockRepository = new StockRepository()
+  categoryRepository: CategoryRepository = new CategoryRepository()
 
   async created() {
     const category: any = this.$route.query.category || CategoryEnum.MASK
     this.stockRepository.setCategory(category)
-    await this.stockRepository.init()
+    await Promise.all([
+      this.stockRepository.init(),
+      this.categoryRepository.findAll()
+    ])
+    this.categoryRepository.getByCategory(category)
   }
 
   next() {

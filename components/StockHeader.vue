@@ -65,7 +65,7 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { StockRepository } from '@/repositories/stock.repository'
-import { findTags, Tag } from '@/enum/tag.enum'
+import { CategoryRepository } from '@/repositories/category.repository'
 import { CATEGORIES, CategoryEnum } from '@/enum/category.enum'
 import {
   STOCK_ORDERS,
@@ -78,15 +78,15 @@ export default class StockHeader extends Vue {
   @Prop({ required: true })
   stockRepository!: StockRepository
 
-  tags: Tag[] = findTags(CategoryEnum.MASK)
+  @Prop({ required: true })
+  categoryRepository!: CategoryRepository
 
   created() {
     const category: any = this.$route.query.category || CategoryEnum.MASK
-    this.tags = findTags(category)
   }
 
   get displayTags() {
-    return this.tags.map((t) => {
+    return this.categoryRepository.tags.map((t) => {
       const selected = this.stockRepository.containTag(t.name)
       return Object.assign(t, { selected })
     })
@@ -99,8 +99,8 @@ export default class StockHeader extends Vue {
   selectCategory(category: CategoryEnum) {
     this.stockRepository.setCategory(category)
     this.stockRepository.resetTags()
-    this.tags = findTags(category)
     this.stockRepository.init()
+    this.categoryRepository.getByCategory(category)
     this.$router.push(`/stocks?category=${category}`)
   }
 
