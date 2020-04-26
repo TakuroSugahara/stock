@@ -148,7 +148,6 @@ export default class Page extends Vue {
     const baseUrl = 'https://www.facebook.com/sharer/sharer.php?'
     const url = ['u', location.href]
     const query = new URLSearchParams([url]).toString()
-    console.log(query)
     return `${baseUrl}${query}`
   }
 
