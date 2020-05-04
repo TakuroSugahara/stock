@@ -25,14 +25,7 @@
           style="border-color: #00BFFF !important"
           :to="`/stocks?category=${category.name}`"
         >
-          <img :src="category.icon" :alt="category.name" width="28" />
-          <div v-if="category.name === 'アルコールティッシュ'" class="ml-2">
-            アルコール<br />
-            ティッシュ
-          </div>
-          <div v-else>
-            {{ category.name }}
-          </div>
+          {{ category.name }}
         </v-btn>
       </v-col>
     </v-row>

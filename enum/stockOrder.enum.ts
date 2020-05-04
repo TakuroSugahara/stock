@@ -1,12 +1,10 @@
 export enum StockOrderEnum {
   PRICE = 'price',
-  AMOUNT = 'amount',
   DELIVERY_DATE = 'deliveryDate'
 }
 
 export enum StockStringOrderEnum {
   PRICE = '価格順',
-  AMOUNT = '数量順',
   DELIVERY_DATE = '配送日順'
 }
 
@@ -19,10 +17,6 @@ export const STOCK_ORDERS = [
   {
     value: StockOrderEnum.PRICE,
     text: StockStringOrderEnum.PRICE
-  },
-  {
-    value: StockOrderEnum.AMOUNT,
-    text: StockStringOrderEnum.AMOUNT
   },
   {
     value: StockOrderEnum.DELIVERY_DATE,

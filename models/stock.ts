@@ -17,7 +17,6 @@ import { PlatformEnum, PlatformLogoEnum } from '@/enum/platform.enum'
 export class Stock extends BaseEntity<Stock> {
   title: string
   price: number
-  amount: number
   deliveryDate: Date | null
   image: string
   platform: PlatformEnum
@@ -33,7 +32,6 @@ export class Stock extends BaseEntity<Stock> {
     this.updatedAt = data.updatedAt
     this.title = data.title
     this.price = data.price
-    this.amount = data.amount
     this.deliveryDate = data.deliveryDate
     this.image = data.image
     this.platform = data.platform
@@ -41,26 +39,6 @@ export class Stock extends BaseEntity<Stock> {
     this.affiliateLink = data.affiliateLink
     this.category = data.category
     this.tags = data.tags || []
-  }
-
-  get unit(): string {
-    if (
-      this.category === CategoryEnum.ALCOHOL_GEL ||
-      this.category === CategoryEnum.ALCOHOL_SPRAY
-    ) {
-      return 'ml'
-    }
-    if (
-      this.category === CategoryEnum.MASK ||
-      this.category === CategoryEnum.ALCOHOL_TISSUE
-    ) {
-      return '枚'
-    }
-    return '個'
-  }
-
-  get canDisplayUnit(): boolean {
-    return this.category !== CategoryEnum.THERMOMETER
   }
 
   get platformLogo(): string {
@@ -72,17 +50,5 @@ export class Stock extends BaseEntity<Stock> {
 
   get displayPrice(): string {
     return Number(this.price).toLocaleString()
-  }
-
-  get unitPrice(): string {
-    if (this.category === CategoryEnum.THERMOMETER) {
-      return ''
-    }
-
-    if (this.category === CategoryEnum.MASK) {
-      return Math.floor(this.price / this.amount).toLocaleString()
-    }
-
-    return Math.floor(this.price / (this.amount / 100)).toLocaleString()
   }
 }

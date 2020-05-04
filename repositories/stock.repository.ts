@@ -62,16 +62,13 @@ export class StockRepository {
   }
 
   private get orderField(): string {
-    if (this.order === StockOrderEnum.AMOUNT) {
-      return `-fields.${this.order}`
-    }
     return `fields.${this.order}`
   }
 
   private get tagsField(): string {
     return this.tags.reduce((pre, cur) => {
       if (pre) {
-        return `${pre},${cur}`
+        return `${pre} ${cur}`
       }
       return cur
     }, '')
@@ -88,7 +85,6 @@ export class StockRepository {
       updatedAt: data.sys.updatedAt,
       title: data.fields.title,
       price: data.fields.price,
-      amount: data.fields.amount,
       deliveryDate: data.fields.deliveryDate,
       image: data.fields.image,
       platform: data.fields.platform,
@@ -113,7 +109,7 @@ export class StockRepository {
       'fields.category': this.category
     }
     if (this.tags.length) {
-      params['fields.tags[in]'] = this.tagsField
+      params.query = this.tagsField
     }
     return params
   }
