@@ -27,11 +27,10 @@
           発送予定日 : {{ displayDeliveryDate }}
         </div>
         <v-btn
-          target="_blank"
-          :href="stock.affiliateLink"
           class="font-weight-bold elevation-0 mb-2 detail black--text"
           color="accent"
           block
+          @click="showDetail(stock)"
           >詳細を見る</v-btn
         >
         <div class="overline">
@@ -46,13 +45,13 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator'
 import moment from 'moment'
 import { Stock } from '@/models/stock'
 
 @Component
 export default class StockCard extends Vue {
-  @Prop({ default: false })
+  @Prop({ required: true })
   stock!: Stock
 
   get displayPrice(): string {
@@ -64,6 +63,11 @@ export default class StockCard extends Vue {
       return '--'
     }
     return moment(this.stock.deliveryDate).format('YYYY/MM/DD')
+  }
+
+  @Emit('show-detail')
+  showDetail(stock: Stock): Stock {
+    return stock
   }
 }
 </script>
