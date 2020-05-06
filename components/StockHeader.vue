@@ -49,7 +49,6 @@ export default class StockHeader extends Vue {
   selectCategory(category: Category) {
     this.stockRepository.setCategory(category.name)
     this.stockRepository.init()
-    this.categoryRepository.getByCategory(category.name)
     this.$router.push(`/stocks?category=${category.name}`)
   }
 }

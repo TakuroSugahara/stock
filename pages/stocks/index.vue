@@ -51,7 +51,7 @@ export default class StockPage extends Vue {
       this.stockRepository.init(),
       this.categoryRepository.findAll()
     ])
-    this.categoryRepository.getByCategory(category)
+    this.categoryRepository.setCategory(category)
   }
 
   next() {
