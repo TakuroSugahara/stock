@@ -35,17 +35,17 @@ export class StockRepository {
   }
 
   private createStockInstance(data: any) {
-    return new Stock({
-      id: data.id,
-      title: data.title,
-      price: data.price,
-      deliveryDate: data.deliveryDate,
-      image: data.image,
-      platform: data.platform,
-      shopName: data.shopName,
-      affiliateLink: data.affiliateLink,
-      category: data.category
-    })
+    return new Stock(
+      data.id,
+      data.title,
+      data.price,
+      data.deliveryDate,
+      data.image,
+      data.platform,
+      data.shopName,
+      data.affiliateLink,
+      data.category
+    )
   }
 
   private setPaginationInfo(data: { hits: number; total: number }) {
