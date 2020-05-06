@@ -1,9 +1,8 @@
 import { BaseEntity } from './baseEntity'
-import { CategoryEnum } from '@/enum/category.enum'
 import { Tag } from '@/enum/tag.enum'
 
 export class Category extends BaseEntity<Category> {
-  name: CategoryEnum
+  name: string
   tags: Tag[]
 
   constructor(data: any) {
@@ -15,7 +14,7 @@ export class Category extends BaseEntity<Category> {
     this.tags = data.tags || []
   }
 
-  sameName(categoryName: CategoryEnum): boolean {
+  sameName(categoryName: string): boolean {
     return this.name === categoryName
   }
 }

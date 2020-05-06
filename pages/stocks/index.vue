@@ -31,7 +31,6 @@ import { CategoryRepository } from '@/repositories/category.repository'
 
 import StockCard from '@/components/StockCard.vue'
 import StockHeader from '@/components/StockHeader.vue'
-import { CategoryEnum } from '@/enum/category.enum'
 
 @Component({
   components: {
@@ -45,7 +44,8 @@ export default class StockPage extends Vue {
   categoryRepository: CategoryRepository = new CategoryRepository()
 
   async created() {
-    const category: any = this.$route.query.category || CategoryEnum.MASK
+    const category: any =
+      this.$route.query.category || this.stockRepository.defaultCategory
     this.stockRepository.setCategory(category)
     await Promise.all([
       this.stockRepository.init(),

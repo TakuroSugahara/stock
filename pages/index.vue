@@ -10,7 +10,7 @@
     <h2 class="mt-5 subtitle-1 font-weight-bold">商品を選択する</h2>
     <v-row class="mx-auto">
       <v-col
-        v-for="(category, i) in categories"
+        v-for="(category, i) in categoryRepository.items"
         :key="i"
         cols="6"
         sm="6"
@@ -25,14 +25,7 @@
           style="border-color: #00BFFF !important"
           :to="`/stocks?category=${category.name}`"
         >
-          <img :src="category.icon" :alt="category.name" width="28" />
-          <div v-if="category.name === 'アルコールティッシュ'" class="ml-2">
-            アルコール<br />
-            ティッシュ
-          </div>
-          <div v-else>
-            {{ category.name }}
-          </div>
+          {{ category.name }}
         </v-btn>
       </v-col>
     </v-row>
@@ -62,8 +55,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { CATEGORIES } from '@/enum/category.enum'
 import { StockRepository } from '@/repositories/stock.repository'
+import { CategoryRepository } from '@/repositories/category.repository'
 import StockCard from '@/components/StockCard.vue'
 
 @Component({
@@ -73,13 +66,11 @@ import StockCard from '@/components/StockCard.vue'
 })
 export default class TemplatePage extends Vue {
   stockRepository: StockRepository = new StockRepository()
-
-  get categories() {
-    return CATEGORIES
-  }
+  categoryRepository: CategoryRepository = new CategoryRepository()
 
   created() {
-    this.stockRepository.list()
+    this.stockRepository.init()
+    this.categoryRepository.findAll()
   }
 }
 </script>
