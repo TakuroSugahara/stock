@@ -8,7 +8,7 @@
       flat
       item-text="name"
       return-object
-      @change="selectCategory"
+      @change="changeCategory"
     >
       <template v-slot:label>
         <span class="caption primary--text">他の商品を探す</span>
@@ -33,7 +33,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'nuxt-property-decorator'
+import { Component, Emit, Prop, Vue } from 'nuxt-property-decorator'
 import { StockRepository } from '@/repositories/stock.repository'
 import { CategoryRepository } from '@/repositories/category.repository'
 import { Category } from '@/models/category'
@@ -46,11 +46,9 @@ export default class StockHeader extends Vue {
   @Prop({ required: true })
   categoryRepository!: CategoryRepository
 
-  selectCategory(category: Category) {
-    this.stockRepository.setCategory(category.name)
-    this.stockRepository.init()
-    this.categoryRepository.getByCategory(category.name)
-    this.$router.push(`/stocks?category=${category.name}`)
+  @Emit('change-category')
+  changeCategory(category: Category) {
+    return category
   }
 }
 </script>

@@ -5,13 +5,19 @@ export class Category extends BaseEntity<Category> {
   name: string
   tags: Tag[]
 
-  constructor(data: any) {
+  constructor(
+    id: string,
+    createdAt: Date,
+    updatedAt: Date,
+    name: string,
+    tags: Tag[] = []
+  ) {
     super()
-    this.id = data.id
-    this.createdAt = data.createdAt
-    this.updatedAt = data.updatedAt
-    this.name = data.name
-    this.tags = data.tags || []
+    this.id = id
+    this.createdAt = createdAt
+    this.updatedAt = updatedAt
+    this.name = name
+    this.tags = tags
   }
 
   sameName(categoryName: string): boolean {
