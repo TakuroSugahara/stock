@@ -1,7 +1,72 @@
-# COMPONENTS
+### 責務の分離方法
+- ユースケース: pages, organisms
+- UI: molecules, atoms
+- ドメイン: models
 
-**This directory is not required, you can delete it if you don't want to use it.**
+### ユースケース
+ユーザーが行う操作。
 
-The components directory contains your Vue.js Components.
+例
+- 〇〇の一覧を表示する
+- 〇〇の詳細を表示する
+- 〇〇の並び替えを行う
 
-_Nuxt.js doesn't supercharge these components._
+#### pages
+- ページに訪れた初回の同期的なユースケース
+- 初回表示のためにREST APIを使って情報を取得するなど
+
+- pagesは複数のorganisms, molecules, atomsを持つ
+- headerやfooterは変更が少ないものとして例外。
+
+例: 在庫一覧を表示する。
+- ユーザーが `/stocks` に訪れる
+- stock.repositoryから在庫一覧を取得する。
+- 取得したデータを子コンポーネントに渡す。
+
+#### orngaisms
+- 非同期のユースケースの責務
+- moleculesから受け取ったイベントとrepositoryや一覧データのつなぎ合わせを行う。
+- 意味のある単位（ユビキタス言語で表現できるようなもの）で分ける。
+- 在庫の一覧を並び替える, カテゴリを変更して在庫の一覧を表示するなど
+- pagesかorganismsにするべきかの判断は初回で表示するデータを取得する操作かどうかで判断する。
+
+例: 〇〇一覧から〇〇詳細ページへ遷移する
+- ユーザーは〇〇一覧の1つをおす
+- orngasimsは押された〇〇のイベントを受け取る
+- 受け取ったデータからページ遷移する
+
+### UI
+表示・非表示、見た目に関すること
+
+例
+- 〇〇一覧UI
+- 〇〇詳細UI
+- 入力フォームUI
+
+#### molecules
+- UI（デザイン）に関する責務。
+- データをを受け取って表示・非表示を行う。
+- データを加工してUIに反映させる
+- UIの変更やユーザー操作などのイベントを飛ばす
+
+propsではinterfaceを使い疎結合な状態にする
+
+例
+- 〇〇の一覧UI (タイトル、画像、説明の要約50文字を表示)
+- 基本情報の変更(name, kana, birthDate)
+
+#### atoms
+- 再利用するコンポーネントの最小単位
+- よく使うボタンなど
+- 単体では意味を持たない。(ユビキタス言語で表現できない)
+
+#### models
+- Entityの定義
+- Entity単体のロジック
+
+#### repository
+- 各apiを通して永続化の依頼や取得
+- apiの仕様を吸収してEntityを取得したり、永続化したりする
+- クエリなどの複雑な処理を吸収
+- apiとの通信の状態
+
