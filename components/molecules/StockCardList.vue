@@ -16,9 +16,10 @@
         outlined
         color="scondary"
         :loading="moreLoading"
+        :disabled="!canMore"
         @click="clickMore"
       >
-        続きを見る
+        {{ moreText }}
       </v-btn>
     </div>
   </div>
@@ -44,12 +45,19 @@ export default class StockCardList extends Vue {
   @Prop({ default: false })
   initLoading: boolean
 
+  @Prop({ default: true })
+  canMore: boolean
+
   @Emit('more')
   clickMore() {}
 
   @Emit('show-detail')
   showDetail(stock: Stock): Stock {
     return stock
+  }
+
+  get moreText(): string {
+    return this.canMore ? 'もっと見る' : '全件表示されました'
   }
 }
 </script>

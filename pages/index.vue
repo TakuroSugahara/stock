@@ -18,12 +18,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
-import { Stock } from '@/models/stock'
 import { StockRepository } from '@/repositories/stock.repository'
 import { CategoryRepository } from '@/repositories/category.repository'
+import { Stock } from '@/models/stock'
+import { Category } from '@/models/category'
 import StockCardList from '@/components/molecules/StockCardList.vue'
 import TopHeader from '@/components/molecules/TopHeader.vue'
-import { Category } from '@/models/category'
 
 @Component({
   components: {

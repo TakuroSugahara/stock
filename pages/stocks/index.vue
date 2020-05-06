@@ -3,38 +3,33 @@
     <StockHeader
       :stock-repository="stockRepository"
       :category-repository="categoryRepository"
+      @change-category="changeCategory"
     />
-    <v-row class="mt-4">
-      <v-col
-        v-for="(stock, i) in stockRepository.items"
-        :key="i"
-        cols="12"
-        sm="6"
-        class="py-1"
-      >
-        <StockCard :stock="stock" />
-      </v-col>
-    </v-row>
-    <div class="text-center">
-      <v-btn text :loading="stockRepository.loading" @click="next">
-        {{ stockRepository.canMore ? 'もっと見る' : '全件表示されました' }}
-      </v-btn>
-    </div>
+    <StockCardList
+      class="mt-4"
+      :stocks="stockRepository.items"
+      :more-loading="stockRepository.loading"
+      @more="next"
+      @show-detail="openStockPage"
+    />
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator'
+
 import { Stock } from '@/models/stock'
+import { Category } from '@/models/category'
+
 import { StockRepository } from '@/repositories/stock.repository'
 import { CategoryRepository } from '@/repositories/category.repository'
 
-import StockCard from '@/components/StockCard.vue'
-import StockHeader from '@/components/StockHeader.vue'
+import StockCardList from '@/components/molecules/StockCardList.vue'
+import StockHeader from '@/components/molecules/StockHeader.vue'
 
 @Component({
   components: {
-    StockCard,
+    StockCardList,
     StockHeader
   }
 })
@@ -44,24 +39,38 @@ export default class StockPage extends Vue {
   categoryRepository: CategoryRepository = new CategoryRepository()
 
   async created() {
-    const category: any =
-      this.$route.query.category || this.stockRepository.defaultCategory
-    this.stockRepository.setCategory(category)
+    const categoryName = this.getCategory()
+    await this.init(categoryName)
+  }
+
+  private getCategory(): string {
+    if (this.$route.query.category) {
+      return String(this.$route.query.category)
+    }
+    return this.stockRepository.defaultCategory
+  }
+
+  private async init(categoryName: string): Promise<void> {
+    this.stockRepository.setCategory(categoryName)
     await Promise.all([
       this.stockRepository.init(),
       this.categoryRepository.findAll()
     ])
-    this.categoryRepository.setCategory(category)
+    this.categoryRepository.setCategory(categoryName)
   }
 
   next() {
     this.stockRepository.next()
   }
+
+  openStockPage(stock: Stock) {
+    open(stock.affiliateLink, '_blank')
+  }
+
+  changeCategory(category: Category) {
+    this.stockRepository.setCategory(category.name)
+    this.stockRepository.init()
+    this.$router.push(`/stocks?category=${category.name}`)
+  }
 }
 </script>
-
-<style>
-#stocks {
-  touch-action: manipulation;
-}
-</style>
