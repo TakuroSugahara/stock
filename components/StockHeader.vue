@@ -6,13 +6,15 @@
       solo
       dense
       flat
+      item-text="name"
+      return-object
       @change="selectCategory"
     >
       <template v-slot:label>
         <span class="caption primary--text">他の商品を探す</span>
       </template>
       <template v-slot:item="{ item }">
-        <span class="list_categopry primary--text">{{ item }}</span>
+        <span class="list_categopry primary--text">{{ item.name }}</span>
       </template>
     </v-select>
     <v-card flat color="transparent">
@@ -34,6 +36,7 @@
 import { Component, Prop, Vue } from 'nuxt-property-decorator'
 import { StockRepository } from '@/repositories/stock.repository'
 import { CategoryRepository } from '@/repositories/category.repository'
+import { Category } from '@/models/category'
 
 @Component
 export default class StockHeader extends Vue {
@@ -43,11 +46,11 @@ export default class StockHeader extends Vue {
   @Prop({ required: true })
   categoryRepository!: CategoryRepository
 
-  selectCategory(category: string) {
-    this.stockRepository.setCategory(category)
+  selectCategory(category: Category) {
+    this.stockRepository.setCategory(category.name)
     this.stockRepository.init()
-    this.categoryRepository.getByCategory(category)
-    this.$router.push(`/stocks?category=${category}`)
+    this.categoryRepository.getByCategory(category.name)
+    this.$router.push(`/stocks?category=${category.name}`)
   }
 }
 </script>
