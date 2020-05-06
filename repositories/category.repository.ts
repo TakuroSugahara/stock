@@ -1,34 +1,32 @@
 import contentful from '@/plugins/contentful'
 import { Category } from '@/models/category'
-import { Tag } from '@/enum/tag.enum'
 
 export class CategoryRepository {
   items: Category[] = []
   category: Category | null = null
-  tags: Tag[] = []
   loading: boolean = false
 
   constructor() {
     this.items = []
-    this.tags = []
     this.loading = false
   }
 
   private createStockInstance(data: any) {
-    return new Category({
-      id: data.sys.id,
-      createdAt: data.sys.createdAt,
-      updatedAt: data.sys.updatedAt,
-      name: data.fields.name,
-      tags: data.fields.tags
-        ? data.fields.tags.map((t: string) => {
-            return {
-              category: data.fields.name,
-              name: t
-            }
-          })
-        : []
-    })
+    const tags = data.fields.tags
+      ? data.fields.tags.map((t: string) => {
+          return {
+            category: data.fields.name,
+            name: t
+          }
+        })
+      : []
+    return new Category(
+      data.sys.id,
+      data.sys.createdAt,
+      data.sys.updatedAt,
+      data.fields.name,
+      tags
+    )
   }
 
   private get CONTENT_TYPE(): string {
@@ -53,10 +51,7 @@ export class CategoryRepository {
     return categories
   }
 
-  // TODO: tagを設定するmethod名に変更
-  getByCategory(category: string): Category {
-    this.category = this.items.find((item) => item.sameName(category))!
-    this.tags = this.category ? this.category.tags : []
-    return this.category
+  setCategory(categoryName: string) {
+    this.category = this.items.find((item) => item.sameName(categoryName))!
   }
 }
