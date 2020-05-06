@@ -1,22 +1,10 @@
-# stock
-
-> My top-notch Nuxt.js project
-
-## Build Setup
+## 開発環境の立ち上げ
 
 ```bash
-# install dependencies
-$ npm install
+$ docker-compose up -d
 
-# serve with hot reload at localhost:3000
+$ docker-compose front /bin/bash
+
 $ npm run dev
 
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
 ```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
