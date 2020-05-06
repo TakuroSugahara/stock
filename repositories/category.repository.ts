@@ -1,6 +1,5 @@
 import contentful from '@/plugins/contentful'
 import { Category } from '@/models/category'
-import { CategoryEnum } from '@/enum/category.enum'
 import { Tag } from '@/enum/tag.enum'
 
 export class CategoryRepository {
@@ -54,7 +53,8 @@ export class CategoryRepository {
     return categories
   }
 
-  getByCategory(category: CategoryEnum): Category {
+  // TODO: tagを設定するmethod名に変更
+  getByCategory(category: string): Category {
     this.category = this.items.find((item) => item.sameName(category))!
     this.tags = this.category ? this.category.tags : []
     return this.category
