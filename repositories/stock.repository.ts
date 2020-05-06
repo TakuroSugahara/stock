@@ -1,149 +1,70 @@
 import { Stock } from '@/models/stock'
-import contentful from '@/plugins/contentful'
-import { CategoryEnum } from '@/enum/category.enum'
-import { StockOrderEnum } from '@/enum/stockOrder.enum'
+import { api } from '@/plugins/api'
 
 export class StockRepository {
   items: Stock[] = []
-  category: CategoryEnum = CategoryEnum.MASK
-  tags: string[] = []
+  category: string = ''
   total: number = 0
   hits: number = 0
-  order: StockOrderEnum = StockOrderEnum.PRICE
+  page: number = 1
   loading: boolean = false
 
   constructor() {
     this.items = []
+    this.page = 1
+    this.total = 0
+    this.hits = 0
+    this.category = this.defaultCategory
+    this.loading = false
   }
 
-  setCategory(category: CategoryEnum) {
+  get defaultCategory(): string {
+    return 'マスク'
+  }
+
+  setCategory(category: string) {
     this.category = category
   }
 
-  setOrder(order: StockOrderEnum) {
-    this.order = order
-  }
-
-  selectTag(tag: string) {
-    if (this.containTag(tag)) {
-      this.popTag(tag)
-      return
-    }
-    this.addTag(tag)
-  }
-
-  resetTags() {
-    this.tags = []
-  }
-
-  private popTag(tag: string) {
-    const index = this.tags.findIndex((t) => t === tag)
-    this.tags.splice(index, 1)
-  }
-
-  private addTag(tag: string) {
-    this.tags.push(tag)
-  }
-
-  containTag(tag: string): boolean {
-    return this.tags.some((t) => t === tag)
-  }
-
-  private get LIMIT(): number {
-    return 20
-  }
-
-  private get skip(): number {
-    return this.items.length
+  setPage(page: number) {
+    this.page = page
   }
 
   get canMore(): boolean {
     return this.items.length < this.total
   }
 
-  private get orderField(): string {
-    return `fields.${this.order}`
-  }
-
-  private get tagsField(): string {
-    return this.tags.reduce((pre, cur) => {
-      if (pre) {
-        return `${pre} ${cur}`
-      }
-      return cur
-    }, '')
-  }
-
-  private get CONTENT_TYPE(): string {
-    return 'stock'
-  }
-
   private createStockInstance(data: any) {
     return new Stock({
-      id: data.sys.id,
-      createdAt: data.sys.createdAt,
-      updatedAt: data.sys.updatedAt,
-      title: data.fields.title,
-      price: data.fields.price,
-      deliveryDate: data.fields.deliveryDate,
-      image: data.fields.image,
-      platform: data.fields.platform,
-      shopName: data.fields.shopName,
-      affiliateLink: data.fields.affiliateLink,
-      category: data.fields.category,
-      tags: data.fields.tags
+      id: data.id,
+      title: data.title,
+      price: data.price,
+      deliveryDate: data.deliveryDate,
+      image: data.image,
+      platform: data.platform,
+      shopName: data.shopName,
+      affiliateLink: data.affiliateLink,
+      category: data.category
     })
   }
 
-  private setPaginationInfo(data: { items: Stock[]; total: number }) {
+  private setPaginationInfo(data: { hits: number; total: number }) {
     this.total = data.total
-    this.hits = data.items.length
-  }
-
-  private get findParams() {
-    const params: any = {
-      limit: this.LIMIT,
-      skip: this.skip,
-      content_type: this.CONTENT_TYPE,
-      order: this.orderField,
-      'fields.category': this.category
-    }
-    if (this.tags.length) {
-      params.query = this.tagsField
-    }
-    return params
+    this.hits = data.hits
   }
 
   /**
    * 現在の条件でStockの一覧を返す
    */
   private async find(): Promise<Stock[]> {
-    const data = await contentful.getEntries(this.findParams)
+    const { data } = await api.get(
+      `/stocks?category=${this.category}&page=${this.page}`
+    )
     const stocks = data.items.map((item: any) => {
       return this.createStockInstance(item)
     })
-    this.setPaginationInfo({ items: stocks, total: data.total })
+    this.setPaginationInfo({ hits: data.hits, total: data.total })
     return stocks
-  }
-
-  /**
-   * 更新日の降順で表示
-   */
-  async list(): Promise<Stock[]> {
-    this.loading = true
-    this.items = []
-    const data = await contentful.getEntries({
-      limit: 10,
-      content_type: this.CONTENT_TYPE,
-      order: '-sys.updatedAt'
-    })
-    const stocks = data.items.map((item: any) => {
-      return this.createStockInstance(item)
-    })
-    this.setPaginationInfo({ items: stocks, total: data.total })
-    this.items = this.items.concat(stocks)
-    this.loading = false
-    return this.items
   }
 
   /**
@@ -152,6 +73,7 @@ export class StockRepository {
   async init(): Promise<Stock[]> {
     this.loading = true
     this.items = []
+    this.setPage(1)
     const items = await this.find()
     this.items = this.items.concat(items)
     this.loading = false
@@ -166,6 +88,7 @@ export class StockRepository {
       return []
     }
     this.loading = true
+    this.setPage(this.page + 1)
     const items = await this.find()
     this.items = this.items.concat(items)
     this.loading = false

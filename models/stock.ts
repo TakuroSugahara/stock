@@ -1,19 +1,6 @@
 import { BaseEntity } from './baseEntity'
-import { CategoryEnum } from '@/enum/category.enum'
 import { PlatformEnum, PlatformLogoEnum } from '@/enum/platform.enum'
 
-// - タイトル
-// - 最終的な価格
-// - 全体の量
-// - 配送日
-// - 画像
-// - 参照サイト
-// - プラットフォーム
-// - 店舗名
-// - アフィリリンク
-// - アフィリエイトリンク先
-// - カテゴリ(マスク・アルコールジェル・アルコールスプレー)
-// - タグ
 export class Stock extends BaseEntity<Stock> {
   title: string
   price: number
@@ -22,14 +9,12 @@ export class Stock extends BaseEntity<Stock> {
   platform: PlatformEnum
   shopName: string
   affiliateLink: string
-  category: CategoryEnum
+  category: string
   tags: string[]
 
   constructor(data: any) {
     super()
     this.id = data.id
-    this.createdAt = data.createdAt
-    this.updatedAt = data.updatedAt
     this.title = data.title
     this.price = data.price
     this.deliveryDate = data.deliveryDate
@@ -48,6 +33,9 @@ export class Stock extends BaseEntity<Stock> {
     return PlatformLogoEnum.AMAZON
   }
 
+  /**
+   * 3桁ごとで,を入れて表示する
+   */
   get displayPrice(): string {
     return Number(this.price).toLocaleString()
   }
